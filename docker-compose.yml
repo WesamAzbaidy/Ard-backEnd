@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - '3000:3000'
+    environment:
+      - DB_HOST=mongo
+      - DB_PORT=27017
+      - DB_NAME=Ard
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:6.0
+    ports:
+      - '27017:27017' # Optional for external access
+    volumes:
+      - mongo-data:/data/db
+    # No authentication environment variables
+
+volumes:
+  mongo-data:
